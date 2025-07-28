@@ -1,13 +1,15 @@
-// Carátula principal diseñada por Sundekant
-// Adapatado a partir de plantilla structured-uib de AugustinWinther
+// -----*****-----
+// ABOUT THIS TEMPLATE
+// -----*****-----
+// Report designed by Sundekant
+// Adapted from template: structured-uib by AugustinWinther
 
-// Función Plantilla
-#let informe(
-  proyecto: none,
-  codigo_proyecto: none,
-  titulo_documento: none,
-  codigo_documento: none,
-  especialidad: none,
+// -----*****-----
+// TEMPLATE FUNCTION
+// -----*****-----
+#let report(
+  project: (),
+  revisions: (),
   revision_actual: none,
   fecha_rev_actual: none,
   jefe_disciplina: none,
@@ -21,96 +23,104 @@
   body
 ) = {
 
-  // Metadata del informe
+  // -----*****-----
+  // DOCUMENT METADATA
+  // -----*****-----
   set document(
-    title: [#codigo_documento - #titulo_documento],
+    title: [#project.doccod - #project.doctit],
     author: "YVT",
     date: datetime.today()
   )
 
-  // Idioma del informe
+  // -----*****-----
+  // DOCUMENT LANGUAGE
+  // -----*****-----
   set text(lang: "es")
 
-  // Fuentes del informe
+  // -----*****-----
+  // DOCUMENT FONTS
+  // -----*****-----
   set text(font: "New Computer Modern")
   show math.equation: set text(font: "New Computer Modern Math")
 
-  // Carátula
+  // -----*****-----
+  // COVER PAGE
+  // -----*****-----
   set page(paper: "a4", margin: (left: 27mm, right: 20mm, top: 20mm, bottom:30mm))
 
-  v(2mm)
+  v(10mm)
 
-  // Logotipos de las empresas
+  // COMPANIES LOGOTIPES
   table(
     columns: (0.2fr, 1fr, 1fr, 0.2fr),
     stroke: none,
     align: horizon+center,
     column-gutter: 5mm,
     [],
-    [#image("Imagenes/Logo_TDC.png", fit: "contain")], 
-    [#image("Imagenes/Logo_JAMFEC.png", fit: "contain")],
+    [#image("assets/logo_client.png", fit: "contain")], 
+    [#image("assets/logo_consulting.png", fit: "contain")],
     [],
   )
 
-  // Información principal del proyecto
   v(5mm)
+
+  // PROJECT TITLE
+
+  v(5mm)
+
   line(length: 16cm, stroke: 0.1cm)
-  align(center, text(size: 24pt, [*#proyecto*]))
+  align(center, text(size: 24pt, smallcaps[*#project.title*]))
+
   line(length: 16cm, stroke: 0.1cm)
-  v(1mm) 
-  align(center, text(size: 20pt, [*#titulo_documento*]))
-  align(center, text(size: 20pt, [*#codigo_documento*]))
-  align(center, text(size: 20pt, [*#especialidad*]))
+
+  // PROJECT GENERAL INFORMATION
+
+  v(5mm) 
+
+  align(center, text(size: 20pt, smallcaps[*#project.doctit*]))
+  align(center, text(size: 20pt, smallcaps[*#project.doccod*]))
+  align(center, text(size: 20pt, smallcaps[*#project.discipline*]))
   align(center, text(size: 20pt, [*#revision_actual*]))
   align(center, text(size: 12pt, [APROBADO POR:]))
-  v(2mm)
 
-  // Tabla de principales interesados del proyecto
+  v(5mm)
+
+  // MAIN PROJECT STAKEHOLDERS
   table(
     columns: (0.75fr, 1fr, 1fr),
     rows:(10mm, 10mm, 10mm),
     stroke: none,
     align: (bottom+left, bottom+left, bottom+left),
     row-gutter: 0mm,
-    [Jefe de disciplina:], [#jefe_disciplina], [],
+    [Jefe de disciplina:], [#project.discesp], [],
     table.hline(start: 2),
-    [Jefe de proyecto:], [#jefe_proyecto], [],
+    [Jefe de proyecto:], [#project.manager], [],
     table.hline(start: 2),
-    [Cliente:], [#cliente], [],
+    [Cliente:], [#project.client], [],
     table.hline(start: 2),
   )
   v(5mm)
 
-  // Tabla de revisiones
-  table(
-    columns: (0.5fr, 0.70fr, 1.5fr, 0.70fr, 0.6fr, 0.6fr),
-    rows: (auto, auto, auto, auto, auto, 25mm),
-    align: (horizon+center, horizon+center, horizon+left, horizon+center, horizon+center, horizon+center),
-    [*Rev.*], [*Hecho Por*], [*Descripción*], [*Fecha*], [*Revisado*], [*Aprobado*],
-    [RevA], [#hecho_por], [Emitido para revisión interna], [01/01/2023], [#revisado_por], [#aprobado_por],
-    [#revision_actual], [#hecho_por], [#descripcion], [#fecha_rev_actual], [#revisado_por], [#aprobado_por],
-    [], [], [], [], [], [],
-    [], [], [], [], [], [],
-    table.cell(colspan: 6, align: top+left)[COMENTARIOS DEL CLIENTE:]
-  )
-
   pagebreak()
 
-  // Configuración para el resto del informe
+  // -----*****-----
+  // PAGE SETUP AFTER COVER
+  // -----*****-----
 
   set page(
     paper: "a4",
-    margin: (left: 27mm, right: 20mm, top: 35mm, bottom:30mm),
+    margin: (left: 27mm, right: 20mm, top: 45mm, bottom:30mm),
     numbering: "1/1",
+    header-ascent: 15pt,
     header: [
       #set text(10pt)
       #table(
         align: (horizon+center),
         columns: (1.5in,3fr,1fr,1.5in),
-          [#codigo_documento\ #revision_actual],
-          [#titulo_documento\ #proyecto\ #especialidad],
+          [#project.doccod\ #revision_actual],
+          [#project.doctit\ #project.title\ #project.discipline],
           [#fecha_rev_actual],
-          [#image("Imagenes/Logo_TDC.png")]
+          [#image("assets/logo_client.png")]
       )
     ]
   )
@@ -131,7 +141,39 @@
   )
   show heading: set block(above: 1.4em, below: 1em)
 
-  // Mostrar contenido
+
+  // -----*****-----
+  // REVISION TABLE
+  // -----*****-----
+  table(
+  columns: 1fr,
+  rows: 10mm,
+  table.cell(align: horizon+center)[*TABLA DE REVISIONES*]
+  )
+  let count = revisions.len()
+  let nrows = calc.min(count)
+  table(
+    columns: (0.5fr, 0.70fr, 1.5fr, 0.70fr, 0.6fr, 0.6fr),
+    rows: (auto, 10mm, 10mm, 10mm, 10mm, 10mm,10mm,10mm,10mm,10mm,10mm,10mm,10mm,10mm, 10mm, 10mm),
+    align: horizon+center,
+    table.header(
+      [*Rev.*], [*Hecho Por*], [*Descripción*], [*Fecha*], [*Revisado*], [*Aprobado*],
+    ),
+    ..revisions.map(revision => [#revision.one]), 
+    ..revisions.map(revision => [#revision.two]),
+    ..revisions.map(revision => [#revision.three]), 
+  )
+  table(
+    columns: 1fr,
+    rows: 30mm,
+    table.cell(align: top+left)[COMENTARIOS DEL CLIENTE:]
+  )
+
+  pagebreak()
+
+  // -----*****-----
+  // REPORT CONTENT
+  // -----*****-----
   body
 
   // 
