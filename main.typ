@@ -5,13 +5,15 @@
 #show: report.with(
   project: (
     title: "Edificio Multifamiliar La Merced",
-    doctit: "Memoria Descriptiva",
-    doccod: "230127-100-MD-001",
+    document: "Memoria Descriptiva",
+    code: "230127-100-MD-001",
     discipline: "Instalaciones Sanitarias",
-    discesp: "L. Torvalds",
+    specialist: "L. Torvalds",
     manager: "Sundekant",
     client: "Empresa S.A.C.",
     designer: "Empresa Diseño",
+    revision: "RevC",
+    date: "01/03/2023",
   ),
   revisions: (
     (
@@ -45,14 +47,6 @@
       three: "B. Gates",
     ),
   ),
-  revision_actual: "RevB",
-  fecha_rev_actual: "01/02/2023",
-  cliente: "Empresa S.A.C.",
-  hecho_por: ("Y. Vasquez"),
-  descripcion: ("Emitido para aprobación del cliente"),
-  revisado_por: ("S. Jobs"),
-  aprobado_por: ("B. Gates"),
-  comentarios_cliente: none,
 )
   
 // Índice generado automáticamente

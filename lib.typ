@@ -10,16 +10,6 @@
 #let report(
   project: (),
   revisions: (),
-  revision_actual: none,
-  fecha_rev_actual: none,
-  jefe_disciplina: none,
-  jefe_proyecto: none,
-  cliente: none,
-  hecho_por: none,
-  descripcion: none,
-  revisado_por: none,
-  aprobado_por: none,
-  comentarios_cliente: none,
   body
 ) = {
 
@@ -27,7 +17,7 @@
   // DOCUMENT METADATA
   // -----*****-----
   set document(
-    title: [#project.doccod - #project.doctit],
+    title: [#project.code - #project.document],
     author: "YVT",
     date: datetime.today()
   )
@@ -77,22 +67,22 @@
 
   v(5mm) 
 
-  align(center, text(size: 20pt, smallcaps[*#project.doctit*]))
-  align(center, text(size: 20pt, smallcaps[*#project.doccod*]))
+  align(center, text(size: 20pt, smallcaps[*#project.document*]))
+  align(center, text(size: 20pt, smallcaps[*#project.code*]))
   align(center, text(size: 20pt, smallcaps[*#project.discipline*]))
-  align(center, text(size: 20pt, [*#revision_actual*]))
+  align(center, text(size: 20pt, [*#project.revision*]))
   align(center, text(size: 12pt, [APROBADO POR:]))
 
   v(5mm)
 
   // MAIN PROJECT STAKEHOLDERS
-  table(
+  table(  
     columns: (0.75fr, 1fr, 1fr),
     rows:(10mm, 10mm, 10mm),
     stroke: none,
     align: (bottom+left, bottom+left, bottom+left),
     row-gutter: 0mm,
-    [Jefe de disciplina:], [#project.discesp], [],
+    [Jefe de disciplina:], [#project.specialist], [],
     table.hline(start: 2),
     [Jefe de proyecto:], [#project.manager], [],
     table.hline(start: 2),
@@ -117,9 +107,9 @@
       #table(
         align: (horizon+center),
         columns: (1.5in,3fr,1fr,1.5in),
-          [#project.doccod\ #revision_actual],
-          [#project.doctit\ #project.title\ #project.discipline],
-          [#fecha_rev_actual],
+          [#project.code\ #project.revision],
+          [#project.document\ #project.title\ #project.discipline],
+          [#project.date],
           [#image("assets/logo_client.png")]
       )
     ]
