@@ -4,9 +4,9 @@
 // Template configuration
 #show: report.with(
   project: (
-    title: "Edificio Multifamiliar La Merced",
+    title: "Edificio La Familia",
     document: "Memoria Descriptiva",
-    code: "230127-100-MD-001",
+    code: "250511-00-MD-001",
     discipline: "Instalaciones Sanitarias",
     specialist: "L. Torvalds",
     manager: "Sundekant",

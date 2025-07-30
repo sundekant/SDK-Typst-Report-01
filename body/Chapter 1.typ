@@ -14,13 +14,14 @@
 
 == Subtítulo 1 <Subtítulo_1>
 
-#lorem(100)
+En esta parte puede ver 
+
 
 Un dibujo de *Bernoulli* se puede ver en la @fig_Beornoulli #footnote([Ver ecuación de Bernoulli en @Capítulo_2]).
 
 #figure(
   caption: [Daniel Bernoulli], 
-  image("../assets/Daniel_Bernoulli.jpg", width: 30%),
+  image("../assets/logo_client.png", width: 30%),
 )<fig_Beornoulli>
 
 #lorem(50)
